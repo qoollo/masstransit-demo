@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <UserSecretsId>dotnet-CartService-85D9867A-C62D-4064-A417-4FF1079C3880</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.2.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\CartService.Contracts\CartService.Contracts.csproj" />
+  </ItemGroup>
+
+  
+</Project>

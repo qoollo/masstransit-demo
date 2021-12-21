@@ -1,0 +1,21 @@
+autogen definitions fsm;
+
+method = case;
+type   = loop;
+prefix = server_fsm;
+
+state = initial, cart_request_pending, money_reservation_request_pending, awaiting_confirmation, money_unreservation_request_pending, archive_order_request_pending, finalized, awaiting_delivery, awaiting_feedback, add_feedback_request_pending;
+event = order_submitted, cart_request_completed, money_reservation_request_completed, order_rejected, money_unreservation_request_completed, archive_order_request_completed, order_confirmed, order_delivered, received_feedback, feedback_receiving_timeout, add_feedback_request_completed;
+
+transition = 
+{ tst = initial; tev = order_submitted; next = cart_request_pending; }
+{ tst = cart_request_pending; tev = cart_request_completed; next = money_reservation_request_pending; }
+{ tst = money_reservation_request_pending; tev = money_reservation_request_completed; next = awaiting_confirmation; }
+{ tst = awaiting_confirmation; tev = order_rejected; next = money_unreservation_request_pending; }
+{ tst = money_unreservation_request_pending; tev = money_reservation_request_completed; next = archive_order_request_pending; }
+{ tst = archive_order_request_pending; tev = archive_order_request_completed; next = finalized; }
+{ tst = awaiting_confirmation; tev = order_confirmed; next = awaiting_delivery; }
+{ tst = awaiting_delivery; tev = order_delivered; next = awaiting_feedback; }
+{ tst = awaiting_feedback; tev = received_feedback; next = add_feedback_request_pending; }
+{ tst = awaiting_feedback; tev = feedback_receiving_timeout; next = archive_order_request_pending; }
+{ tst = add_feedback_request_pending; tev = add_feedback_request_completed; next = archive_order_request_pending; }

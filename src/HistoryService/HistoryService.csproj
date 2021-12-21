@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <UserSecretsId>dotnet-HistoryService-7D9C4E29-7145-4EA2-B4D2-C14532CDFC52</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.2.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\HistoryService.Contracts\HistoryService.Contracts.csproj" />
+  </ItemGroup>
+</Project>

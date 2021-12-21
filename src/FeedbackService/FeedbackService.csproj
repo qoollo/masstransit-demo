@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <UserSecretsId>dotnet-FeedbackService-82A53F3F-FE0A-4157-A449-820E9FB32243</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.2.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\FeedbackService.Contracts\FeedbackService.Contracts.csproj" />
+  </ItemGroup>
+</Project>

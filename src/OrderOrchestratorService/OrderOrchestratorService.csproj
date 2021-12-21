@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+	  <Nullable>enable</Nullable>
+	  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.2.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.EntityFrameworkCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Quartz" Version="7.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.0" />
+    <PackageReference Include="Quartz" Version="3.3.3" />
+    <PackageReference Include="Quartz.AspNetCore" Version="3.3.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\ApiService.Contracts\ApiService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\CartService.Contracts\CartService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\DeliveryService.Contracts\DeliveryService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\FeedbackService.Contracts\FeedbackService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\HistoryService.Contracts\HistoryService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\PaymentService.Contracts\PaymentService.Contracts.csproj" />
+  </ItemGroup>
+</Project>

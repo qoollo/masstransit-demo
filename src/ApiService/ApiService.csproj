@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <Nullable>enable</Nullable>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="7.2.4" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.2.4" />
+    <PackageReference Include="MassTransit.Prometheus" Version="7.2.4" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.2.4" />
+    <PackageReference Include="prometheus-net.AspNetCore" Version="5.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\ApiService.Contracts\ApiService.Contracts.csproj" />
+    <ProjectReference Include="..\Contracts\CartService.Contracts\CartService.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,123 @@
+version: '3.2'
+
+services:
+  rabbitmq:
+    image: masstransit/rabbitmq
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  database:
+    image: postgres:latest
+    restart: always
+    environment:
+        POSTGRES_USER: "postgres"
+        POSTGRES_PASSWORD: "postgres"
+    ports: 
+        - 5432:5432
+    volumes:
+        - "./data:/var/lib/postgresql/data"
+
+  api_service:
+      image: api_service
+      container_name: api_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/api_service.json:/app/appsettings.json"
+      ports: 
+          - 80:80
+      depends_on: 
+        - rabbitmq
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "ApiService.dll"]
+
+  cart_service:
+      image: cart_service
+      container_name: cart_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/cart_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+        - database
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "CartService.dll"]
+
+  delivery_service:
+      image: delivery_service
+      container_name: delivery_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/delivery_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "DeliveryService.dll"]
+
+
+  feedback_service:
+      image: feedback_service
+      container_name: feedback_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/feedback_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+        - database
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "FeedbackService.dll"]
+
+
+  history_service:
+      image: history_service
+      container_name: history_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/history_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+        - database
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "HistoryService.dll"]
+
+  orchestrator_service:
+      image: orchestrator_service
+      container_name: orchestrator_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/orchestrator_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+        - database
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "OrderOrchestratorService.dll"]
+
+  payment_service:
+      image: payment_service
+      container_name: payment_service
+      restart: always
+      volumes: 
+        - "./scripts/wait-for-it.sh:/app/wait-for-it.sh"
+        - "./appsettings/payment_service.json:/app/appsettings.json"
+      depends_on: 
+        - rabbitmq
+        - database
+      entrypoint: ["./wait-for-it.sh", "-s", "rabbitmq:5672", "--", "dotnet", "PaymentService.dll"]
+
+  prometheus:
+      image: prom/prometheus
+      ports:
+        - 9090:9090
+      volumes:
+        - "./configs/prometheus.yml:/etc/prometheus/prometheus.yml"
+  
+  grafana:
+      image: grafana/grafana
+      ports:
+        - 3000:3000
+      volumes:
+        - "./configs/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/rabbitmq.yaml"
+        - "./configs/grafana/datasources.yml:/etc/grafana/provisioning/datasources/prometheus.yaml"
+        - "./configs/grafana/dashboards:/dashboards"
